@@ -1,0 +1,186 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  --overlay-color: rgba(0, 0, 0, 0.2); /* Default */
+  margin: 0;
+  font-family: sans-serif;
+  background-image: url("../Bilder/frontpage.webp");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  position: relative;
+  overflow-x: hidden;
+  z-index: 0;
+  --overlay-color: rgba(0, 0, 0, 0.2);
+}
+
+/* Skjuler overlayen når "dynamic-background" klassen ikke er på */
+/* Når "dynamic-background" klassen er på, vis overlay */
+body.dynamic-background::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: var(--overlay-color); /* Overlay-farge styrt av JS */
+  z-index: -1;
+  pointer-events: none;
+  transition: background 0.2s ease;
+  display: block; /* Vis overlay når effekten er på */
+}
+
+/* Grunnleggende layout for topp-baren og menyen */
+header.top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 1rem 2rem;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.nav-links a {
+  color: white;
+  margin: 0 1rem;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+  color: #00ffff;
+}
+
+.effect-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.effect-toggle select {
+  padding: 0.3rem;
+  background: #111;
+  color: white;
+  border: 1px solid white;
+  border-radius: 5px;
+}
+
+main {
+  position: relative;
+  z-index: 1;
+  padding: 4rem 2rem;
+}
+
+section {
+  margin: 4rem 0;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  background: rgba(0, 0, 0, 0.4);
+  padding: 2rem;
+  border-radius: 10px;
+}
+
+h1 {
+  color: #333;
+  font-size: 90px;
+  margin-bottom: 20px;
+}
+p1 {
+  color: #333;
+  font-size: 20px;
+}
+
+a {
+  color: white; /* Lys blå f.eks */
+  text-decoration: none; /* Fjerner understrek hvis ønskelig */
+}
+
+a.active {
+  color: #00ffff;
+  border-bottom: 2px solid #00ffff;
+  padding-bottom: 2px;
+}
+
+label {
+  color: white;
+}
+
+/* Media query for vertikal meny på høyre side */
+@media (max-height: 500px) {
+  header.top-bar {
+    flex-direction: row;  /* Hold topp-baren horisontal */
+    justify-content: flex-end; /* Plasser menyen til høyre */
+    padding: 1rem; /* Juster padding hvis nødvendig */
+  }
+
+  .nav-links {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 200px; /* Bredde på menyen */
+    height: 100vh; /* Fyller hele skjermens høyde */
+    background-color: rgba(0, 0, 0, 0.7); /* Bakgrunn for menyen */
+    display: flex;
+    flex-direction: column; /* Gjør menyen vertikal */
+    justify-content: center;
+    gap: 1rem;
+    padding: 2rem;
+  }
+
+  .nav-links a {
+    color: white;
+    font-size: 18px; /* Større tekst for bedre lesbarhet */
+    text-align: center;
+  }
+
+  .effect-toggle {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+/* Når skjermen er mindre enn 768px, gjør menyen vertikal på høyre side */
+@media (max-width: 768px) {
+  header.top-bar {
+    flex-direction: row;
+    justify-content: flex-end;
+    padding: 1rem; 
+  }
+
+  .nav-links {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 150px;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1rem;
+    padding: 2rem;
+  }
+
+  .nav-links a {
+    color: white;
+    font-size: 18px;
+    text-align: center;
+  }
+
+  .effect-toggle {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
